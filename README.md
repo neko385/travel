@@ -1,24 +1,28 @@
-# README
+# travel
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+旅行先で行ってよかったと思った場所を他者に知ってもらうことができます。
+他者の投稿を見て次はここにも行きたいと思ってもらいたいです。
+### サイトテーマ
+どこに旅行に行こうか迷っている人が投稿を見て自分も行きたいと思ってもらえることを目的としている。旅行が好きな人が他の人にも行って見てほしい場所を投稿できる。
 
-Things you may want to cover:
+### テーマを選んだ理由
+私は旅行に行くのが好きだが、いざ行こうと思うとどこに行こうか迷ってしまうため、他の人が行ってよかったと思った場所を知りたいと思ったため。また自分が行ってよかったと思った場所を他の人にも知ってもらいたいと思ったため。
 
-* Ruby version
+### ターゲットユーザ
+旅行が好きな人、旅行に行きたいがどこに行こうか迷っている人
 
-* System dependencies
+### 主な利用シーン
+旅行先に迷ったときに検索したり、自分が行ってよかったと思った場所を他の人に知ってもらいたいとき
 
-* Configuration
+## 設計書
 
-* Database creation
 
-* Database initialization
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
