@@ -1,24 +1,46 @@
-# README
+# travel
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+### サイトテーマ
 
-* Ruby version
+どこに旅行に行こうか迷っている人が投稿を見て自分も行きたいと思ってもらえることを目的としている。
+旅行が好きな人が他の人にも行ってほしい場所を投稿できる SNS サイト。
 
-* System dependencies
+### テーマを選んだ理由
 
-* Configuration
+コロナが落ち着き旅行に行く人が増え、旅行先での思い出や景色を投稿することで投稿を見ていいと思った人が実際に行くことで、旅行先や旅行会社の利益があると考えられる
+自分の住んでいる場所のいいところを掲載することで観光客を呼び込み、地域の発展に繋げられると考えられる
+たくさんの人が投稿することで近場で知らなかった場所を知ることができる
+コロナ禍で旅行を自粛していた人たちがコロナが落ち着いたら行きたい場所を探すのに使用できるものがあれば良いと思った。
 
-* Database creation
 
-* Database initialization
+### ターゲットユーザ
 
-* How to run the test suite
+- 旅行が好きな人
+- 旅行に行きたいがどこに行こうか迷っている人
+- 旅行での思い出や綺麗な景色を他の人にも知ってもらいたい人
+- 旅行予定場所の近くに他に観光地がないか探している人
+- 他者から見た自身の住んでる場所のいいところを知りたい人
 
-* Services (job queues, cache servers, search engines, etc.)
+### 主な利用シーン
 
-* Deployment instructions
+- 旅行先に迷ったとき
+- 自身の思い出を共有したいとき
+- 今まで行ったことのない場所を探したいとき
+- 自身の住んでいる場所のいいところをアピールしたり，知りたいとき
 
-* ...
+## 設計書
+
+
+## 開発環境
+
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JS ライブラリ：jQuery
+- IDE：Cloud9
+
+## 使用素材
+
+使用検討中です
