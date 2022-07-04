@@ -6,7 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :travel_memories, dependent: :destroy
   has_many :travel_memory_comments, dependent: :destroy
-  has_many :favorites, dependent: :destrou
+  has_many :favorites, dependent: :destroy
   # 自分がフォローされる側
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :reverse_of_relationships, source: :follower

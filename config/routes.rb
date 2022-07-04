@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       # get 'customers/edit'
       # get 'customers/confirm'
     end
-    resources :travel_memories, only: [:index, :show, :edit, :update, :destroy] do
+    resources :travel_memories, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resources :travel_memory_comments, only: [:create, :destroy]
       resource :favorite, only: [:create, :destroy]
     # get 'travel_memories/index'

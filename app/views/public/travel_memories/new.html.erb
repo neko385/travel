@@ -1,0 +1,16 @@
+<h1>新規投稿</h1>
+
+<%= form_with model: @travel_memory, url: public_travel_memories_path, method: :post do |f| %>
+  <h3>画像</h3>
+    <%= f.file_field :image, accept: "image/*" %>
+
+  <h3>場所</h3>
+    <%= f.text_field :place %>
+
+  <h3>紹介文</h3>
+    <%= f.text_area :introduction %>
+
+    <%= f.hidden_field :customer_id, value: current_customer.id %>
+
+    <%= f.submit '投稿する' %>
+<% end %>

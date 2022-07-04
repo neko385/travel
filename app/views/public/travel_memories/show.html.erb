@@ -1,2 +1,14 @@
 <h1>Public::TravelMemories#show</h1>
-<p>Find me in app/views/public/travel_memories/show.html.erb</p>
+<h1>投稿詳細</h1>
+<p>画像</p>
+  <%= image_tag @travel_memory.image %>
+
+<p>場所</p>
+  <%= @travel_memory.place %>
+
+<p>紹介文</p>
+  <%= @travel_memory.introduction %>
+
+<p>
+<%= link_to '一覧に戻る', public_travel_memories_path %> | <%= link_to '編集する', edit_public_travel_memory_path %>
+</p>

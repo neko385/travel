@@ -1,2 +1,16 @@
 <h1>Public::TravelMemories#index</h1>
-<p>Find me in app/views/public/travel_memories/index.html.erb</p>
+<h1>投稿一覧</h1>
+<% @travel_memories.each do |travel_memory| %>
+  <p>画像</p>
+  <% if travel_memory.image.attached? %>
+    <%= image_tag travel_memory.image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "100x100" %>
+  <% end %>
+
+  <p>場所</p>
+  <%= travel_memory.place %>
+
+  <p>紹介文</p>
+  <%= travel_memory.introduction %>
+<% end %>
