@@ -1,7 +1,7 @@
 <h1>Public::TravelMemories#show</h1>
 <h1>投稿詳細</h1>
 <p>画像</p>
-  <%= image_tag @travel_memory.image %>
+  <%= image_tag @travel_memory.get_image, size: "150x150" %>
 
 <p>場所</p>
   <%= @travel_memory.place %>

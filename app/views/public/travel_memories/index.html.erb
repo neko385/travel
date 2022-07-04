@@ -2,10 +2,8 @@
 <h1>投稿一覧</h1>
 <% @travel_memories.each do |travel_memory| %>
   <p>画像</p>
-  <% if travel_memory.image.attached? %>
-    <%= image_tag travel_memory.image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "100x100" %>
+  <%= link_to public_travel_memory_path(travel_memory.id) do %>
+    <%= image_tag travel_memory.get_image, size: "100x100" %>
   <% end %>
 
   <p>場所</p>
@@ -13,4 +11,6 @@
 
   <p>紹介文</p>
   <%= travel_memory.introduction %>
+
+  <p><%= link_to '詳細を見る', public_travel_memory_path(travel_memory.id) %></p>
 <% end %>
