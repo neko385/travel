@@ -1,0 +1,2 @@
+class TravelMemoryComment < ApplicationRecord
+end
