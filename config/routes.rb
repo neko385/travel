@@ -1,16 +1,20 @@
 Rails.application.routes.draw do
-  root to: 'public/homes#top'
-  get 'public/about' => 'public/homes#about', as: 'about'
+
   # 顧客用
   # URL/customers/sign_in
   devise_for :customers,skip: [:passwords], controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
-  namespace :public do
+  scope module: :public do
+    root to: 'homes#top'
+    get 'about' => 'homes#about', as: 'about'
+
     resources :customers, only: [:show, :edit, :update] do
-      patch 'withdraw' => 'customers#withdraw', as: 'withdraw'
+      # 退会確認画面
       get 'comfirm' => 'customers#confirm', as: 'confirm'
+      # 論理削除用のルーティング
+      patch 'withdraw' => 'customers#withdraw', as: 'withdraw'
       # get 'customers/show'
       # get 'customers/edit'
       # get 'customers/confirm'
