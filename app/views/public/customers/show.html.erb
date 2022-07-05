@@ -4,7 +4,9 @@
   ユーザー名
 <%= @customer.screen_name %>
 </p>
-<%= link_to "登録情報編集", edit_customer_path(@customer) %>
+<% if @customer.screen_name != "guestuser" %>
+  <%= link_to "登録情報編集", edit_customer_path(@customer) %>
+<% end %>
 
 <h4>My投稿</h4>
 <% @travel_memories.each do |travel_memory| %>

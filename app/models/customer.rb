@@ -17,4 +17,11 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
+
+  def self.guest
+    find_or_create_by!(screen_name: 'guestuser', email: 'guest@example.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.screen_name = "guestuser"
+    end
+  end
 end

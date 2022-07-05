@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-
+  # ゲストログイン用
+  devise_scope :customer do
+    post 'customers/guest_sign_in', to: 'customers/sessions#guest_sign_in'
+  end
   # 顧客用
   # URL/customers/sign_in
   devise_for :customers,skip: [:passwords], controllers: {
