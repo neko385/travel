@@ -4,7 +4,7 @@
   ユーザー名
 <%= @customer.screen_name %>
 </p>
-<%= link_to "登録情報編集", edit_public_customer_path(@customer) %>
+<%= link_to "登録情報編集", edit_customer_path(@customer) %>
 
 <h4>My投稿</h4>
 <% @travel_memories.each do |travel_memory| %>
@@ -17,5 +17,6 @@
   <p>紹介文</p>
   <%= travel_memory.introduction %>
 
-  <%= link_to "詳細を見る", public_travel_memory_path(travel_memory.id) %>
+  <%= link_to "詳細を見る", travel_memory_path(travel_memory.id) %>
 <% end %>
+

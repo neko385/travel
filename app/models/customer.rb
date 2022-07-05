@@ -14,4 +14,7 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
 
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end
