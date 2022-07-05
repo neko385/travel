@@ -1,2 +1,36 @@
 <h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<h1>登録情報編集</h1>
+<%= form_with model: @customer, url: public_customer_path, method: :patch do |f| %>
+  <div class="field">
+    <%= f.label :ユーザー名 %>
+    <%= f.text_field :screen_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :氏名 %>
+    <span>姓</span>
+    <%= f.text_field :last_name %>
+    <span>名</span>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :フリガナ %>
+    <span>セイ</span>
+    <%= f.text_field :last_kana %>
+    <span>メイ</span>
+    <%= f.text_field :first_kana %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メールアドレス %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.submit '編集する' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', public_customer_path(@customer) %>
+

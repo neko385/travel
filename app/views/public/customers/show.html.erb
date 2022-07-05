@@ -1,2 +1,21 @@
 <h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<h1>マイページ</h1>
+<p>
+  ユーザー名
+<%= @customer.screen_name %>
+</p>
+<%= link_to "登録情報編集", edit_public_customer_path(@customer) %>
+
+<h4>My投稿</h4>
+<% @travel_memories.each do |travel_memory| %>
+  <p>画像</p>
+  <%= image_tag travel_memory.get_image, size: "150x150" %>
+
+  <p>場所</p>
+  <%= travel_memory.place %>
+
+  <p>紹介文</p>
+  <%= travel_memory.introduction %>
+
+  <%= link_to "詳細を見る", public_travel_memory_path(travel_memory.id) %>
+<% end %>
