@@ -6,7 +6,7 @@ class Public::TravelMemoriesController < ApplicationController
   def create
     @travel_memory = TravelMemory.new(travel_memory_params)
     if @travel_memory.save
-      redirect_to public_travel_memory_path(@travel_memory)
+      redirect_to travel_memory_path(@travel_memory)
     else
       render :new
     end
@@ -18,6 +18,7 @@ class Public::TravelMemoriesController < ApplicationController
 
   def show
     @travel_memory = TravelMemory.find(params[:id])
+    @customer = @travel_memory.customer
   end
 
   def edit
@@ -27,10 +28,16 @@ class Public::TravelMemoriesController < ApplicationController
   def update
     @travel_memory = TravelMemory.find(params[:id])
     if @travel_memory.update(travel_memory_params)
-      redirect_to public_travel_memory_path
+      redirect_to travel_memory_path
     else
       render :edit
     end
+  end
+
+  def destroy
+    @travel_memory = TravelMemory.find(params[:id])
+    @travel_memory.destroy
+    redirect_to travel_memories_path
   end
 
   private

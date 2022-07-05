@@ -10,5 +10,9 @@
   <%= @travel_memory.introduction %>
 
 <p>
-<%= link_to '一覧に戻る', public_travel_memories_path %> | <%= link_to '編集する', edit_public_travel_memory_path %>
+<%= link_to '一覧に戻る', travel_memories_path %>
+
+<% if @customer.id == current_customer.id %>
+  <%= link_to '編集する', edit_travel_memory_path %>
+<% end %>
 </p>

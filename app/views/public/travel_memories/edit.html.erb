@@ -1,7 +1,7 @@
 <h1>Public::TravelMemories#edit</h1>
 <h1>投稿編集</h1>
 
-<%= form_with model: @travel_memory, url: public_travel_memory_path, method: :patch do |f| %>
+<%= form_with model: @travel_memory, url: travel_memory_path, method: :patch do |f| %>
 <p>画像</p>
 <%= f.file_field :image %>
 
@@ -11,9 +11,10 @@
 <p>紹介文</p>
 <%= f.text_area :introduction %>
 
-<%= f.submit '編集する' %>
+<%= f.submit "編集する" %>
 
+<%= link_to "削除する", travel_memory_path, method: :delete %>
 <% end %>
 <p>
-  <%= link_to '戻る', public_travel_memory_path %>
+  <%= link_to "戻る", travel_memory_path %>
 </p>
