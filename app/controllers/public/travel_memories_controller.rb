@@ -19,6 +19,7 @@ class Public::TravelMemoriesController < ApplicationController
   def show
     @travel_memory = TravelMemory.find(params[:id])
     @customer = @travel_memory.customer
+    @travel_memory_comment = TravelMemoryComment.new
   end
 
   def edit

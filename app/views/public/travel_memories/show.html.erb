@@ -8,6 +8,9 @@
 
 <p>紹介文</p>
   <%= @travel_memory.introduction %>
+<p>投稿者：<%= link_to @customer.screen_name, customer_path(@travel_memory.customer) %></p>
+
+<%= render 'public/favorites/btn', travel_memory: @travel_memory %>
 
 <p>
 <%= link_to '一覧に戻る', travel_memories_path %>
@@ -16,3 +19,6 @@
   <%= link_to '編集する', edit_travel_memory_path %>
 <% end %>
 </p>
+<p>コメント件数:<%= @travel_memory.travel_memory_comments.count %></p>
+<%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+<%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
