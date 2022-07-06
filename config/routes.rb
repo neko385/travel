@@ -22,8 +22,8 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followers', as: 'followers'
     end
     resources :travel_memories do
-      resources :travel_memory_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
+      resources :travel_memory_comments, only: [:create, :destroy]
     end
     get 'search' => 'searches#search'
   end
