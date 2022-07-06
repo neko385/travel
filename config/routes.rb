@@ -12,22 +12,18 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about', as: 'about'
-
     resources :customers, only: [:show, :edit, :update] do
       # 退会確認画面
       get 'comfirm' => 'customers#confirm', as: 'confirm'
       # 論理削除用のルーティング
       patch 'withdraw' => 'customers#withdraw', as: 'withdraw'
-      # get 'customers/show'
-      # get 'customers/edit'
-      # get 'customers/confirm'
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
-    resources :travel_memories, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
+    resources :travel_memories do
       resources :travel_memory_comments, only: [:create, :destroy]
-      resource :favorite, only: [:create, :destroy]
-    # get 'travel_memories/index'
-    # get 'travel_memories/show'
-    # get 'travel_memories/edit'
+      resource :favorites, only: [:create, :destroy]
     end
     get 'search' => 'searches#search'
   end
