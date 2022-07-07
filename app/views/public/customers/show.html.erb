@@ -1,12 +1,23 @@
 <h1>Public::Customers#show</h1>
+<% if current_customer == @customer.id %>
 <h1>マイページ</h1>
+<% else %>
+<h1>会員詳細</h1>
+<% end %>
 <p>
   ユーザー名
 <%= @customer.screen_name %>
 </p>
-<% if @customer.screen_name != "guestuser" %>
-  <%= link_to "登録情報編集", edit_customer_path(@customer) %>
+<% if current_customer != @customer %>
+  <%= render 'public/relationships/btn', customer: @customer %>
+<% else %>
+  <% if @customer.screen_name != "guestuser" %>
+    <%= link_to "登録情報編集", edit_customer_path(@customer) %>
+  <% end %>
 <% end %>
+<p>フォロー：<%= link_to @customer.followings.count, customer_followings_path(@customer) %></p>
+<p>フォロワー：<%= link_to @customer.followers.count, customer_followers_path(@customer) %></p>
+
 
 <h4>My投稿</h4>
 <% @travel_memories.each do |travel_memory| %>

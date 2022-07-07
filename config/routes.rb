@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_scope :customer do
     post 'customers/guest_sign_in', to: 'customers/sessions#guest_sign_in'
   end
+
   # 顧客用
   # URL/customers/sign_in
   devise_for :customers,skip: [:passwords], controllers: {
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
+
     resources :travel_memories do
       resource :favorites, only: [:create, :destroy]
       resources :travel_memory_comments, only: [:create, :destroy]

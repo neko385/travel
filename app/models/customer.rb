@@ -14,6 +14,20 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
 
+  # フォローした時の処理
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
+  end
+  # フォローを外す時の処理
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
+  end
+  # フォローしているか判定
+  def following?(customer)
+    followings.include?(customer)
+  end
+
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
