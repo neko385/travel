@@ -13,5 +13,6 @@
   <%= travel_memory.introduction %>
 
   <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+  <p><%= render 'public/favorites/btn', travel_memory: travel_memory %></p>
   <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
 <% end %>
