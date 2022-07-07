@@ -1,0 +1,8 @@
+<h4>お気に入り一覧</h4>
+<% @favorite_travel_memories.each do |travel_memory| %>
+  <%= link_to travel_memory_path(travel_memory) do %>
+    <%= image_tag travel_memory.get_image, size: "200x200" %>
+  <% end %>
+  <p>場所:<%= travel_memory.place %></p>
+  <p>紹介:<%= travel_memory.introduction %></p>
+<% end %>
