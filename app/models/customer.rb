@@ -38,4 +38,12 @@ class Customer < ApplicationRecord
       customer.screen_name = "guestuser"
     end
   end
+
+  def self.search(keyword)
+    if keyword != ""
+      Customer.where(["screen_name like?", "%#{keyword}%"])
+    else
+      Customer.all
+    end
+  end
 end
