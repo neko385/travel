@@ -34,8 +34,8 @@ class Public::CustomersController < ApplicationController
 
   def favorites
     @customer = Customer.find(params[:id])
-    favorites = Favorite.where(customer_id: @customer.id).pluck(:travel_memory_id)
-    @favorite_travel_memories = TravelMemory.find(favorites)
+    @favorites = Favorite.where(customer_id: @customer.id).pluck(:travel_memory_id)
+    @favorite_travel_memories = TravelMemory.find(@favorites)
   end
 
 
