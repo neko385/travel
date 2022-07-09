@@ -1,20 +1,26 @@
-<h1>Public::TravelMemories#edit</h1>
-<h1>投稿編集</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="margin-top: 50px;">
+      <h1>投稿編集</h1>
 
-<%= form_with model: @travel_memory, url: travel_memory_path, method: :patch do |f| %>
-<p>画像</p>
-<%= f.file_field :image %>
+      <%= form_with model: @travel_memory, url: travel_memory_path, method: :patch do |f| %>
+        <p>画像</p>
+        <%= f.file_field :image %>
 
-<p>場所</p>
-<%= f.text_field :place %>
+        <p>場所</p>
+        <%= f.text_field :place %>
 
-<p>紹介文</p>
-<%= f.text_area :introduction %>
+        <p>紹介文</p>
+        <%= f.text_area :introduction %>
 
-<%= f.submit "編集する" %>
-
-<%= link_to "削除する", travel_memory_path, method: :delete %>
-<% end %>
-<p>
-  <%= link_to "戻る", travel_memory_path %>
-</p>
+        <p>
+          <%= f.submit "編集する", class: "btn btn-sm btn-success" %>
+          <%= link_to "削除する", travel_memory_path, method: :delete, class: "btn btn-sm btn-danger" %>
+        </p>
+      <% end %>
+      <p>
+        <%= link_to "戻る", travel_memory_path %>
+      </p>
+    </div>
+  </div>
+</div>

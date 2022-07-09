@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_customer!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
+
   # 顧客側ログイン後
   def after_public_sign_in_path_for(resource)
     public_travel_memories_path
