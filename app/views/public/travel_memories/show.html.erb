@@ -11,7 +11,10 @@
       </p>
       <p>投稿者：<%= link_to @customer.screen_name, customer_path(@travel_memory.customer) %></p>
       <% if customer_signed_in? %>
-        <p><%= render 'public/favorites/btn', travel_memory: @travel_memory %></p>
+        <!--いいね機能非同期通信-->
+        <p id="favorite_<%= @travel_memory.id %>">
+          <%= render 'public/favorites/btn', travel_memory: @travel_memory %>
+        </p>
         <p>
           <%= link_to '一覧に戻る', travel_memories_path, class: "btn btn-sm btn-primary" %>
 

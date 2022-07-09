@@ -8,7 +8,10 @@
       <p style="max-width: 200px">紹介:<%= travel_memory.introduction %></p>
       <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
       <% if customer_signed_in? %>
-        <p><%= render 'public/favorites/btn', travel_memory: travel_memory %></p>
+      <!--いいね機能非同期通信-->
+        <p id="favorite_<%= travel_memory.id %>">
+          <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+        </p>
       <% end %>
       <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
     </div>
