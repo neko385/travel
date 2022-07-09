@@ -1,24 +1,30 @@
-<h1>Public::TravelMemories#show</h1>
-<h1>投稿詳細</h1>
-<p>画像</p>
-  <%= image_tag @travel_memory.get_image, size: "150x150" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" style="margin-top: 50px;">
+      <h1>投稿詳細</h1>
+      <p><%= image_tag @travel_memory.get_image, size: "150x150" %></p>
 
-<p>場所</p>
-  <%= @travel_memory.place %>
+      <p>場所:<%= @travel_memory.place %></p>
 
-<p>紹介文</p>
-  <%= @travel_memory.introduction %>
-<p>投稿者：<%= link_to @customer.screen_name, customer_path(@travel_memory.customer) %></p>
+      <p>紹介文
+      <%= @travel_memory.introduction %>
+      </p>
+      <p>投稿者：<%= link_to @customer.screen_name, customer_path(@travel_memory.customer) %></p>
+      <% if customer_signed_in? %>
+        <p><%= render 'public/favorites/btn', travel_memory: travel_memory %></p>
+        <p>
+          <%= link_to '一覧に戻る', travel_memories_path, class: "btn btn-sm btn-primary" %>
 
-<%= render 'public/favorites/btn', travel_memory: @travel_memory %>
-
-<p>
-<%= link_to '一覧に戻る', travel_memories_path %>
-
-<% if @customer.id == current_customer.id %>
-  <%= link_to '編集する', edit_travel_memory_path %>
-<% end %>
-</p>
-<p>コメント件数:<%= @travel_memory.travel_memory_comments.count %></p>
-<%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
-<%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+          <% if @customer.id == current_customer.id %>
+            <%= link_to '編集する', edit_travel_memory_path, class: "btn btn-sm btn-success" %>
+          <% end %>
+        </p>
+      <% end %>
+      <p>コメント件数:<%= @travel_memory.travel_memory_comments.count %></p>
+      <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+      <% if customer_signed_in? %>
+        <%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+      <% end %>
+    </div>
+  </div>
+</div>

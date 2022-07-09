@@ -1,38 +1,42 @@
-<h1>Public::Customers#edit</h1>
-<h1>登録情報編集</h1>
-<%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
-  <div class="field">
-    <%= f.label :ユーザー名 %>
-    <%= f.text_field :screen_name %>
+<div class="container">
+  <div class-"row">
+    <div class="col-md-6" style="margin-top: 50px;">
+      <h1>登録情報編集</h1>
+      <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
+        <div class="field">
+          <%= f.label :ユーザー名 %>
+          <%= f.text_field :screen_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :氏名 %>
+          <span>姓</span>
+          <%= f.text_field :last_name %>
+          <span>名</span>
+          <%= f.text_field :first_name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :フリガナ %>
+          <span>セイ</span>
+          <%= f.text_field :last_kana %>
+          <span>メイ</span>
+          <%= f.text_field :first_kana %>
+        </div>
+
+        <div class="field">
+          <%= f.label :メールアドレス %>
+          <%= f.email_field :email %>
+        </div>
+
+        <div class="field">
+          <%= f.submit '編集する', class: "btn btn-sm btn-success" %>
+          <%= link_to '戻る', customer_path(@customer), class: "btn btn-sm btn-primary" %>
+        </div>
+      <% end %>
+      <p>
+        <%= link_to "退会する", customer_confirm_path(@customer), class: "btn btn-sm btn-danger" %>
+      </p>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :氏名 %>
-    <span>姓</span>
-    <%= f.text_field :last_name %>
-    <span>名</span>
-    <%= f.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :フリガナ %>
-    <span>セイ</span>
-    <%= f.text_field :last_kana %>
-    <span>メイ</span>
-    <%= f.text_field :first_kana %>
-  </div>
-
-  <div class="field">
-    <%= f.label :メールアドレス %>
-    <%= f.email_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.submit '編集する' %>
-    <%= link_to '戻る', customer_path(@customer) %>
-  </div>
-<% end %>
-
-
-<%= link_to "退会する", customer_confirm_path(@customer) %>
-
+</div>

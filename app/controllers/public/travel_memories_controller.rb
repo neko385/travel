@@ -1,4 +1,6 @@
 class Public::TravelMemoriesController < ApplicationController
+  before_action :authenticate_customer!, except: [:index, :show]
+
   def new
     @travel_memory = TravelMemory.new
   end

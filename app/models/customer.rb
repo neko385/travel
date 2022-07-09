@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :image
   has_many :travel_memories, dependent: :destroy
   has_many :travel_memory_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -13,6 +14,10 @@ class Customer < ApplicationRecord
   # 自分がフォローする側
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
+
+  # def get_profile_image
+  #   (profile_image.attached?) ? profile_image : 'no_image_customer.jpg'
+  # end
 
   # フォローした時の処理
   def follow(customer_id)
