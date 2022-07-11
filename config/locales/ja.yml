@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    attributes:
+      travel_memory:
+        place: 場所
+        introduction: 紹介文
+      travel_memory_comment:
+        comment: コメント
+      customer:
+        screen_name: ユーザー名
+        last_name: 姓
+        first_name: 名
+        last_kana: フリガナ（セイ）
+        first_kana: フリガナ（メイ）
+        email: メールアドレス
+        password: パスワード
+      admin:
+        email: メールアドレス
+        password: パスワード

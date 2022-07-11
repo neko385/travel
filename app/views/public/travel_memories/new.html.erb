@@ -1,19 +1,27 @@
-<h1>新規投稿</h1>
+<div class="container">
+  <%= render 'public/travel_memories/errors', obj: @travel_memory %>
+  <div class="row">
+    <div class="col-md-6" style="margin-top: 50px;">
+      <h1>新規投稿</h1>
+      <%= form_with model: @travel_memory, url: travel_memories_path, method: :post do |f| %>
+        <h5>画像</h5>
+        <%= f.file_field :image, accept: "image/*" %>
 
-<%= form_with model: @travel_memory, url: travel_memories_path, method: :post do |f| %>
-  <h3>画像</h3>
-    <%= f.file_field :image, accept: "image/*" %>
+        <h5>場所</h5>
+        <%= f.text_field :place %>
 
-  <h3>場所</h3>
-    <%= f.text_field :place %>
+        <h5>紹介文</h5>
+        <%= f.text_area :introduction %>
 
-  <h3>紹介文</h3>
-    <%= f.text_area :introduction %>
+        <%= f.hidden_field :customer_id, value: current_customer.id %>
+        <p>
+          <%= f.submit '投稿する', class: "btn btn-md btn-success" %>
+        </p>
 
-    <%= f.hidden_field :customer_id, value: current_customer.id %>
-
-    <%= f.submit '投稿する' %>
-<% end %>
-<p>
-  <%= link_to '一覧に戻る', travel_memories_path %>
-</p>
+      <% end %>
+      <p>
+        <%= link_to '一覧に戻る', travel_memories_path, class: "btn btn-sm btn-primary" %>
+      </p>
+    </div>
+  </div>
+</div>

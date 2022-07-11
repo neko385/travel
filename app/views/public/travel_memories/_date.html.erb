@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap justify-content-around">
+  <% @travel_memories.each do |travel_memory| %>
+    <div class="box">
+      <%= link_to travel_memory_path(travel_memory.id) do %>
+        <%= image_tag travel_memory.get_image, size: "200x200" %>
+      <% end %>
+      <p>場所:<%= travel_memory.place %></p>
+      <p style="max-width: 200px">紹介:<%= travel_memory.introduction %></p>
+      <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+      <% if customer_signed_in? %>
+      <!--いいね機能非同期通信-->
+        <p id="favorite_<%= travel_memory.id %>">
+          <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+        </p>
+      <% end %>
+      <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
+    </div>
+  <% end %>
+</div>

@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :image
   has_many :travel_memories, dependent: :destroy
   has_many :travel_memory_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -14,6 +15,24 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
 
+  # def get_profile_image
+  #   (profile_image.attached?) ? profile_image : 'no_image_customer.jpg'
+  # end
+
+  # フォローした時の処理
+  def follow(customer_id)
+    relationships.create(followed_id: customer_id)
+  end
+  # フォローを外す時の処理
+  def unfollow(customer_id)
+    relationships.find_by(followed_id: customer_id).destroy
+  end
+  # フォローしているか判定
+  def following?(customer)
+    followings.include?(customer)
+  end
+
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
@@ -22,6 +41,14 @@ class Customer < ApplicationRecord
     find_or_create_by!(screen_name: 'guestuser', email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64
       customer.screen_name = "guestuser"
+    end
+  end
+
+  def self.search(keyword)
+    if keyword != ""
+      Customer.where(["screen_name like?", "%#{keyword}%"])
+    else
+      Customer.all
     end
   end
 end
