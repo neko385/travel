@@ -27,7 +27,7 @@
         // マップ表示
         map = new google.maps.Map(target, {
           center: empire,
-          zoom: 14
+          zoom: 8
         });
       }
 
@@ -102,7 +102,7 @@
         // };
         // var map = new google.maps.Map(document.getElementById('map'), Options);
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?language=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 
     </div>
   </div>
