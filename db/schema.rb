@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_021919) do
   create_table "travel_memories", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "place", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2022_07_04_021919) do
   create_table "travel_memory_comments", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "travel_memory_id", null: false
-    t.text "comment", default: "", null: false
+    t.text "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
