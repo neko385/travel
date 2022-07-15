@@ -23,11 +23,15 @@
           <% end %>
         </p>
       <% end %>
-      <p>コメント件数:<%= @travel_memory.travel_memory_comments.count %></p>
-      <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
-      <% if customer_signed_in? %>
-        <%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
-      <% end %>
+      <p class="comments-count"><%= render 'public/travel_memory_comments/counter', travel_memory: @travel_memory %></p>
+      <div class="new-comment">
+        <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+      </div>
+      <div id="comments-area">
+        <% if customer_signed_in? %>
+          <%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
