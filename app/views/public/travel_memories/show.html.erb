@@ -27,11 +27,11 @@
       <div class="new-comment">
         <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
       </div>
-      <div id="comments-area">
-        <% if customer_signed_in? %>
+      <% if customer_signed_in? %>
+        <div id="comments-area">
           <%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
