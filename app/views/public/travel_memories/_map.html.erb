@@ -13,18 +13,8 @@
         var map;
         var marker;
         var infoWindow;
-        var latlng = new google.maps.LatLng(35.681236,139.767125);
-          function initMap() {
-            map = new google.maps.Map(document.getElementById('target'), {
-              center: latlng,
-              zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-          });
-          marker = new google.maps.Marker({
-            position: latlng,
-            map: target
-          });
-        }
+
+        function initMap() {
           //  マップ初期表示の位置設定
           var target = document.getElementById('target');
           var empire = {lat: 34.5801650, lng: 135.4623190};
@@ -39,25 +29,6 @@
             var place = document.getElementById('keyword').value;
             var geocoder = new google.maps.Geocoder();
 
-
-            // 住所から緯度と経度を調べる
-            // var geocoder;
-            // function initMap() {
-            //     geocoder = new google.maps.Geocoder();
-            //   geocoder.geocode({
-            //     'address': '東京都千代田区神田小川町3−28-9'
-            //   }, function(results, status) {
-            //     if (status == google.maps.GeocoderStatus.OK) {
-            //         console.group('Success');
-            //       console.log(results);
-            //         console.log(status);
-            //     } else {
-            //       console.group('Error');
-            //         console.log(results);
-            //         console.log(status);
-            //     }
-            //   });
-            // }
             geocoder.geocode({
               address: place
             }, function(results, status) {
@@ -85,7 +56,7 @@
                 alert("見つかりません");
               } else {
                 console.log(status);
-                alert("エラー発生")
+                 alert('Geocode was not successful for the following reason: ' + status);
               }
             });
 
@@ -130,12 +101,12 @@
             infoWindow.open(map, marker);
           });
         }
-        var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
-        var Options = {
-        zoom: 15,      //地図の縮尺値
-        center: MyLatLng,    //地図の中心座標
-        mapTypeId: 'roadmap'   //地図の種類
-        };
-        var map = new google.maps.Map(document.getElementById('map'), Options);
+        // var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
+        // var Options = {
+        // zoom: 15,      //地図の縮尺値
+        // center: MyLatLng,    //地図の中心座標
+        // mapTypeId: 'roadmap'   //地図の種類
+        // };
+        // var map = new google.maps.Map(document.getElementById('map'), Options);
       </script>
 
