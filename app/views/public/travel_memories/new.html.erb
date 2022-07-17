@@ -23,5 +23,7 @@
         <%= link_to '一覧に戻る', travel_memories_path, class: "btn btn-sm btn-primary" %>
       </p>
     </div>
+    <div class="col-md-6" style="margin-top: 50px;">
+      <%= render 'public/travel_memories/map', travel_memories: @travel_memories %>
   </div>
 </div>
