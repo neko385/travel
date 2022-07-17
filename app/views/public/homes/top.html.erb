@@ -5,7 +5,9 @@
       <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
 
       <div id="header">Google Maps - 場所検索</div>
-      <input type="text" id="keyword"><button id="search">検索実行</button>
+
+       <input type="text" id="address"><br>
+      <input type="text" id="mapKeyword" name="keyword"><button id="search" onclik="search">検索</button>
       <button id="clear">結果クリア</button>
       <div id="target"></div>
       <style>
@@ -32,7 +34,7 @@
       }
 
       document.getElementById('search').addEventListener('click', function() {
-        var place = document.getElementById('keyword').value;
+        var place = document.getElementById('mapKeyword').value;
         var geocoder = new google.maps.Geocoder();
 
         geocoder.geocode({
@@ -55,9 +57,14 @@
                 markerEvent();
               }
             }
+            map.fitBounds(bounds);
+            document.getElementById('address').value = latlng;
           } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
             alert("見つかりません");
           } else {
+            console.log(place);
+            console.log(geocoder);
+            console.log(results);
             console.log(status);
             alert("エラー発生")
           }
@@ -102,7 +109,7 @@
         // };
         // var map = new google.maps.Map(document.getElementById('map'), Options);
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 
     </div>
   </div>
