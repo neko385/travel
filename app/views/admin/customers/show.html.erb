@@ -1,12 +1,12 @@
-<h1>Admin::Customers#show</h1>
 <div class="container">
   <div class="row">
-    <div class="col_md-6">
-      <table>
+    <div class="col-md-3"></div>
+    <div class="col-md-6 mt-5">
+      <table class="table mt-3">
         <h3>会員詳細</h3>
         <tr>
           <th>ユーザー名</th>
-          <td><%= @customer.screen_name %></td>
+          <td colspan="2"><%= @customer.screen_name %></td>
         </tr>
         <tr>
           <th>氏名</th>
@@ -20,11 +20,11 @@
         </tr>
         <tr>
           <th>メールアドレス</th>
-          <td><%= @customer.email %></td>
+          <td colspan="2"><%= @customer.email %></td>
         </tr>
         <tr>
           <th>ステータス</th>
-          <td>
+          <td colspan="2">
             <% if @customer.is_deleted %>
               退会済み
             <% else %>
@@ -33,8 +33,9 @@
           </td>
         </tr>
         <tr>
-          <td><%= link_to "編集する", edit_admin_customer_path(@customer) %></td>
-          <td><%= link_to "一覧へ戻る", admin_customers_path %></td>
+          <th></th>
+          <td><%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-sm btn-success"%></td>
+          <td><%= link_to "一覧へ戻る", admin_customers_path, class: "btn btn-sm btn-primary"%></td>
         </tr>
       </table>
     </div>
