@@ -39,17 +39,10 @@
       <style>
         #map {
           height: 400px;
-          width: 600px}
+          width: auto
+        }
       </style>
 
-      <div id="map"></div>
-      <style>
-        #map {
-          height: 400px;
-          width: auto}
-      </style>
-
-      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
       <script>
         var map;
         var marker;
@@ -72,6 +65,7 @@
           });
         }
       </script>
+      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
     </div>
   </div>
 </div>

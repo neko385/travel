@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-top: 50px;">
       <h4>お気に入り一覧</h4>
       <div class="d-flex flex-wrap">
-
       <% @favorite_travel_memories.each do |travel_memory| %>
         <div class="box mx-2">
           <%= link_to travel_memory_path(travel_memory) do %>
@@ -13,11 +12,11 @@
           <p>紹介:<%= travel_memory.introduction %></p>
           <% if customer_signed_in? %>
             <!--いいね機能非同期通信-->
-              <p id="favorite_<%= travel_memory.id %>">
-                <%= render 'public/favorites/btn', travel_memory: travel_memory %>
-              </p>
-            <% end %>
-            <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
+            <p id="favorite_<%= travel_memory.id %>">
+              <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+            </p>
+          <% end %>
+          <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
         </div>
       <% end %>
 
