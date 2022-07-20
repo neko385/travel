@@ -1,16 +1,26 @@
-<h2>キーワード検索結果</h2>
-<% if @range == "Customer" %>
-  <h5>検索結果は"<%= @keyword %>"</h5>
-  <% @customer.each do |customer| %>
-    <p><%= customer.screen_name %></p>
-    <%= link_to "詳細を見る", customer_path(customer) %>
-  <% end %>
-<% else %>
-  <h5>検索結果は"<%= @keyword %>"</h5>
-  <% @travel_memories.each do |travel_memory| %>
-    <p><%= image_tag travel_memory.get_image, size: "150x150" %></p>
-    <p><%= travel_memory.place %></p>
-    <p><%= travel_memory.introduction %></p>
-    <p><%= link_to "詳細を見る", travel_memory_path(travel_memory) %></p>
-  <% end %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>キーワード検索結果</h2>
+      <% if @range == "Customer" %>
+        <h5>検索結果は"<%= @keyword %>"</h5>
+        <% @customer.each do |customer| %>
+          <p><%= customer.screen_name %></p>
+          <p><%= link_to "詳細を見る", customer_path(customer) %></p>
+        <% end %>
+      <% else %>
+        <h5>検索結果は"<%= @keyword %>"</h5>
+        <div class="d-flex flex-wrap">
+          <% @travel_memories.each do |travel_memory| %>
+          <div class="box mx-2">
+            <p><%= image_tag travel_memory.get_image, size: "150x150" %></p>
+            <p><%= travel_memory.place %></p>
+            <p><%= travel_memory.introduction %></p>
+            <p><%= link_to "詳細を見る", travel_memory_path(travel_memory) %></p>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
