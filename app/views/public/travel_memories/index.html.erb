@@ -27,7 +27,12 @@
             center: empire,
             zoom: 8
           });
-
+          <% @travel_memories_map.each do |travel_memory| %>
+          var marker = new google.maps.Marker({
+                position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
+                map: map
+          });
+          <% end %>
           document.getElementById('search').addEventListener('click', function() {
             var place = document.getElementById('keyword').value;
             var geocoder = new google.maps.Geocoder();
@@ -106,7 +111,26 @@
         }
       </script>
       <h4>投稿一覧</h4>
-      <%= render 'public/travel_memories/date', travel_memories: @travel_memories %>
+      <div class="d-flex flex-wrap">
+        <% @travel_memories.each do |travel_memory| %>
+          <div class="box mx-2">
+            <%= link_to travel_memory_path(travel_memory.id) do %>
+              <%= image_tag travel_memory.get_image, size: "200x200" %>
+            <% end %>
+            <p>場所:<%= safe_join(travel_memory.place.split("\n"),tag(:br)) %></p>
+            <p>紹介:<%= travel_memory.introduction.truncate(10) %></p>
+            <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+            <% if customer_signed_in? %>
+            <!--いいね機能非同期通信-->
+              <p id="favorite_<%= travel_memory.id %>">
+                <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+              </p>
+            <% end %>
+            <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
+          </div>
+        <% end %>
+        <%= paginate @travel_memories %>
+      </div>
     </div>
   </div>
 </div>

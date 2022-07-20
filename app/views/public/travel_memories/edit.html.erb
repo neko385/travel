@@ -2,7 +2,7 @@
   <%= render 'public/travel_memories/errors', obj: @travel_memory %>
   <div class="row">
     <div class="col-md-6" style="margin-top: 50px;">
-      <h1>投稿編集</h1>
+      <h4>投稿編集</h4>
 
       <%= form_with model: @travel_memory, url: travel_memory_path, method: :patch do |f| %>
         <p>画像</p>

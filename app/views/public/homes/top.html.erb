@@ -9,13 +9,14 @@
        <input type="text" id="address"><br>
       <input type="text" id="mapKeyword" name="keyword"><button id="search" onclik="search">検索実行</button>
       <button id="clear">結果クリア</button>
-      <div id="target"></div>
+      <div id="map"></div>
+      <!--<div id="target"></div>-->
       <style>
         #map {
           height: 400px;
           width: 600px}
       </style>
-      <div id="map"></div>
+
       <script>
       var map;
       var marker;
@@ -101,13 +102,6 @@
           infoWindow.open(map, marker);
         });
       }
-        // var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
-        // var Options = {
-        // zoom: 15,      //地図の縮尺値
-        // center: MyLatLng,    //地図の中心座標
-        // mapTypeId: 'roadmap'   //地図の種類
-        // };
-        // var map = new google.maps.Map(document.getElementById('map'), Options);
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 
