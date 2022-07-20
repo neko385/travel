@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
+
     <div class="col-md-6" style="margin-top: 50px;">
-      <h1>投稿詳細</h1>
+      <h4 style="margin-top: 30px;">投稿詳細</h4>
       <p><%= image_tag @travel_memory.get_image, size: "150x150" %></p>
 
       <p>場所:<%= @travel_memory.place %></p>
@@ -32,6 +33,45 @@
           <%= render 'public/travel_memory_comments/form', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comment %>
         </div>
       <% end %>
+    </div>
+    <div class="col-md-6" style="margin-top: 100px;">
+      <div id="map"></div>
+      <style>
+        #map {
+          height: 400px;
+          width: 600px}
+      </style>
+
+      <div id="map"></div>
+      <style>
+        #map {
+          height: 400px;
+          width: auto}
+      </style>
+
+      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+      <script>
+        var map;
+        var marker;
+        var infoWindow;
+
+        function initMap() {
+          //  マップ初期表示の位置設定
+          var map = document.getElementById('map');
+          var empire = {lat:<%= @travel_memory.latitude %>, lng: <%= @travel_memory.longitude %>};
+
+          // マップ表示
+          map = new google.maps.Map(map, {
+            center: empire,
+            zoom: 14
+          });
+
+          var marker = new google.maps.Marker({
+                position: empire,
+                map: map,
+          });
+        }
+      </script>
     </div>
   </div>
 </div>

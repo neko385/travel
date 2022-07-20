@@ -6,6 +6,9 @@ class Public::TravelMemoriesController < ApplicationController
   end
 
   def create
+    puts 'travel_memory_params'
+    puts travel_memory_params
+
     @travel_memory = TravelMemory.new(travel_memory_params)
     if @travel_memory.save
       redirect_to travel_memory_path(@travel_memory)
@@ -15,7 +18,8 @@ class Public::TravelMemoriesController < ApplicationController
   end
 
   def index
-    @travel_memories = TravelMemory.all
+    @travel_memories_map = TravelMemory.all
+    @travel_memories = TravelMemory.page(params[:page]).per(10)
   end
 
   def show
@@ -26,6 +30,9 @@ class Public::TravelMemoriesController < ApplicationController
 
   def edit
     @travel_memory = TravelMemory.find(params[:id])
+    if @travel_memory.customer != current_customer
+      redirect_to travel_memories_path
+    end
   end
 
   def update
@@ -45,6 +52,6 @@ class Public::TravelMemoriesController < ApplicationController
 
   private
   def travel_memory_params
-    params.require(:travel_memory).permit(:customer_id, :place, :introduction, :image)
+    params.require(:travel_memory).permit(:customer_id, :place, :introduction, :image, :latitude, :longitude)
   end
 end
