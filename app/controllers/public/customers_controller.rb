@@ -1,13 +1,16 @@
 class Public::CustomersController < ApplicationController
-
   before_action :ensure_guest_customer, only: [:edit]
+
   def show
     @customer = Customer.find(params[:id])
-    @travel_memories = @customer.travel_memories
+    @travel_memories = @customer.travel_memories.order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def edit
     @customer = Customer.find(params[:id])
+    if @customer != current_customer
+      redirect_to customer_path(@customer)
+    end
   end
 
   def update
@@ -36,6 +39,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @favorites = Favorite.where(customer_id: @customer.id).pluck(:travel_memory_id)
     @favorite_travel_memories = TravelMemory.find(@favorites)
+
   end
 
 

@@ -6,9 +6,6 @@ class Public::TravelMemoriesController < ApplicationController
   end
 
   def create
-    puts 'travel_memory_params'
-    puts travel_memory_params
-
     @travel_memory = TravelMemory.new(travel_memory_params)
     if @travel_memory.save
       redirect_to travel_memory_path(@travel_memory)
@@ -19,7 +16,7 @@ class Public::TravelMemoriesController < ApplicationController
 
   def index
     @travel_memories_map = TravelMemory.all
-    @travel_memories = TravelMemory.page(params[:page]).per(10)
+    @travel_memories = TravelMemory.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show

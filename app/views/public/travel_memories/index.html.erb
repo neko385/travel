@@ -1,14 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div id="header">Google Maps - 場所検索</div>
-      <input type="text" id="keyword"><button id="search">検索実行</button>
-      <button id="clear">結果クリア</button>
+      <div id="header">Google Maps - 投稿一覧</div>
       <div id="map"></div>
       <style>
         #map {
           height: 400px;
-          width: auto}
+          width: auto
+        }
       </style>
 
       <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
@@ -25,91 +24,19 @@
           // マップ表示
           map = new google.maps.Map(map, {
             center: empire,
-            zoom: 8
+            zoom: 6
           });
+
           <% @travel_memories_map.each do |travel_memory| %>
           var marker = new google.maps.Marker({
                 position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
                 map: map
           });
           <% end %>
-          document.getElementById('search').addEventListener('click', function() {
-            var place = document.getElementById('keyword').value;
-            var geocoder = new google.maps.Geocoder();
-
-            geocoder.geocode({
-              address: place
-            }, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-
-                var bounds = new google.maps.LatLngBounds();
-
-                for (var i in results) {
-                  if (results[0].geometry) {
-                    // 緯度経度を取得
-                    var latlng = results[0].geometry.location;
-                    // 住所を取得
-                    var address = results[0].formatted_address;
-                    // 検索結果値が含まれるように拡大
-                    bounds.extend(latlng);
-                    // マーカーのセット
-                    setMarker(latlng);
-                    // マーカーへの吹き出しの追加
-                    setInfoW(place, latlng, address);
-                    // マーカーにクリックイベントを追加
-                    markerEvent();
-                  }
-                }
-              } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-                alert("見つかりません");
-              } else {
-                console.log(status);
-                alert("エラー発生")
-              }
-            });
-
-          });
-
-          // 検索クリアボタン押下時
-          document.getElementById('clear').addEventListener('click', function() {
-            deleteMarkers();
-          });
-        }
-
-        // マーカのセットを実施する
-        function setMarker(setplace) {
-          deleteMarkers();
-
-          var iconUrl = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-            marker = new google.maps.Marker({
-              position: setplace,
-              map: map,
-              icon: iconUrl
-          });
-        }
-        // マーカを削除する
-        function deleteMarkers() {
-          if(marker != null){
-            marker.setMap(null);
-          }
-          marker = null;
-        }
-
-        // マーカーへの吹き出しの追加
-        function setInfoW(place, latlng, address) {
-          infoWindow = new google.maps.InfoWindow({
-          content: "<a href='http://www.google.com/search?q=" + place + "' map='_blank'>" + place + "</a><br><br>" + latlng + "<br><br>" + address + "<br><br><a href='http://www.google.com/search?q=" + place + "&tbm=isch' target='_blank'>画像検索 by google</a>"
-        });
-      }
-
-
-        // クリックイベント
-        function markerEvent() {
-          marker.addListener('click', function() {
-            infoWindow.open(map, marker);
-          });
         }
       </script>
+    </div>
+    <div class="col-12" style="margin-top: 30px;">
       <h4>投稿一覧</h4>
       <div class="d-flex flex-wrap">
         <% @travel_memories.each do |travel_memory| %>
@@ -117,7 +44,7 @@
             <%= link_to travel_memory_path(travel_memory.id) do %>
               <%= image_tag travel_memory.get_image, size: "200x200" %>
             <% end %>
-            <p>場所:<%= safe_join(travel_memory.place.split("\n"),tag(:br)) %></p>
+            <p>場所:<%= travel_memory.place %></p>
             <p>紹介:<%= travel_memory.introduction.truncate(10) %></p>
             <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
             <% if customer_signed_in? %>
@@ -129,6 +56,8 @@
             <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
           </div>
         <% end %>
+      </div>
+      <div class="pagination" style="justify-content: center; margin-top: 30px;">
         <%= paginate @travel_memories %>
       </div>
     </div>
