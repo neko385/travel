@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @travel_memories = @customer.travel_memories.order(created_at: :desc).page(params[:page]).per(8)
+    @travel_memories = @customer.travel_memories.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
@@ -39,7 +39,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @favorites = Favorite.where(customer_id: @customer.id).pluck(:travel_memory_id)
     @favorite_travel_memories = TravelMemory.find(@favorites)
-
+    # @favorite_index = @customer.favorites.page(params[:page]).per(10)
   end
 
 

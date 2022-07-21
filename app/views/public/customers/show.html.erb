@@ -34,8 +34,8 @@
 
           <p>場所:<%= travel_memory.place %></p>
 
-          <p style="width: 200px">紹介文:<br>
-          <%= travel_memory.introduction %>
+          <p style="width: 150px; height: 50px">紹介文:
+          <%= travel_memory.introduction.truncate(15) %>
           </p>
           <!--いいね機能非同期通信-->
           <p id="favorite_<%= travel_memory.id %>">
