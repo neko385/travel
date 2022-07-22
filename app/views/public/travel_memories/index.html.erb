@@ -29,8 +29,8 @@
 
           <% @travel_memories_map.each do |travel_memory| %>
           var marker = new google.maps.Marker({
-                position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
-                map: map
+            position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
+            map: map
           });
           <% end %>
         }
