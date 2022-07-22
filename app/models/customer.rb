@@ -15,6 +15,14 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
 
+  # バリデーション
+  validates :screen_name, presence: true, length: { minimum: 2, maximum: 20 }
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_kana, presence: true
+  validates :first_kana, presence: true
+  validates :email, presence: true
+
   # def get_profile_image
   #   (profile_image.attached?) ? profile_image : 'no_image_customer.jpg'
   # end
@@ -41,6 +49,10 @@ class Customer < ApplicationRecord
     find_or_create_by!(screen_name: 'guestuser', email: 'guest@example.com') do |customer|
       customer.password = SecureRandom.urlsafe_base64
       customer.screen_name = "guestuser"
+      customer.last_name = "ゲスト"
+      customer.first_name = "太郎"
+      customer.last_kana = "ゲスト"
+      customer.first_kana = "タロウ"
     end
   end
 
