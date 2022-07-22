@@ -5,9 +5,9 @@ class Public::SearchesController < ApplicationController
     @range = params[:range]
     @keyword = params[:keyword]
     if @range == "Customer"
-      @customer = Customer.search(params[:keyword])
+      @customer = Customer.order(created_at: :desc).page(params[:page]).per(10).search(params[:keyword])
     else
-      @travel_memories = TravelMemory.search(params[:keyword])
+      @travel_memories = TravelMemory.order(created_at: :desc).page(params[:page]).per(10).search(params[:keyword])
     end
   end
 end

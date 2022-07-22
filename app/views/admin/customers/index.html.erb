@@ -1,21 +1,32 @@
-<h1>Admin::Customers#index</h1>
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mt-5">
+      <table class="table mt-3">
+        <thead>
+          <h3>登録会員一覧</h3>
+          <tr>
+            <th>ユーザー名</th>
+            <th>投稿数</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= customer.screen_name %></td>
+            <td><%= customer.travel_memories.count %>件</td>
+            <td><%= link_to "詳細を見る", admin_customer_path(customer) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
       <table>
-        <h3>登録会員一覧</h3>
         <tr>
-          <th>ユーザー名</th>
-          <th>投稿数</th>
-          <th></th>
+          <td>
+            <%= paginate @customers %>
+          </td>
         </tr>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.screen_name %></td>
-          <td><%= customer.travel_memories.count %>件</td>
-          <td><%= link_to "詳細を見る", admin_customer_path(customer) %></td>
-        </tr>
-      <% end %>
       </table>
     </div>
   </div>

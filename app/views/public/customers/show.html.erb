@@ -1,43 +1,41 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2" style="margin-top: 50px;">
-      <% if current_customer == @customer.id %>
+      <% if current_customer.id == @customer.id %>
         <h3>マイページ</h3>
       <% else %>
         <h3>会員詳細</h3>
       <% end %>
+
+      <p class="mt-5">ユーザー名:<%= @customer.screen_name %></p>
+      <% if current_customer != @customer %>
+      <!--ログインしているユーザーと異なる場合にフォローボタンを表示-->
+        <p><%= render 'public/relationships/btn', customer: @customer %></p>
+      <% else %>
+      <!--ログインしているユーザの場合かつゲストユーザーではない場合に表示-->
+        <% if @customer.screen_name != "guestuser" %>
+          <p class="mt-3"><%= link_to "登録情報編集", edit_customer_path(@customer), class: "btn btn-sm btn-success" %></p>
+        <% end %>
+      <% end %>
+      <p class="mt-3">フォロー：<%= link_to @customer.followings.count, customer_followings_path(@customer) %></p>
+      <p>フォロワー：<%= link_to @customer.followers.count, customer_followers_path(@customer) %></p>
+      <p><%= link_to "お気に入り一覧", favorites_customer_path(@customer), class: "btn btn-sm btn-primary" %></p>
     </div>
-    <div class="col-md-10 d-flex flex-wrap" style="margin-top: 50px;">
+    <div class="col-md-10" style="margin-top: 50px;">
       <% if current_customer.id == @customer.id %>
         <h3>My投稿</h3>
       <% else %>
         <h3><%= @customer.screen_name %>さんの投稿</h3>
       <% end %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2" style="margin-top: 50px;">
-     <p>ユーザー名<%= @customer.screen_name %></p>
-      <% if current_customer != @customer %>
-        <p><%= render 'public/relationships/btn', customer: @customer %></p>
-      <% else %>
-        <% if @customer.screen_name != "guestuser" %>
-          <%= link_to "登録情報編集", edit_customer_path(@customer) %>
-        <% end %>
-      <% end %>
-      <p>フォロー：<%= link_to @customer.followings.count, customer_followings_path(@customer) %></p>
-      <p>フォロワー：<%= link_to @customer.followers.count, customer_followers_path(@customer) %></p>
-      <p><%= link_to "お気に入り一覧", favorites_customer_path(@customer) %></p>
-    </div>
-    <div class="col-md-10 d-flex flex-wrap" style="margin-top: 50px;">
+      <div class="d-flex flex-wrap">
       <% @travel_memories.each do |travel_memory| %>
-        <div class="box" style="max-width: 200px; max-height: 300px;">
+        <div class="box m-3" style="width: 150px; height: 400px;">
           <p><%= image_tag travel_memory.get_image, size: "150x150" %></p>
 
-          <p>場所:<%= travel_memory.place %></p>
+          <p style="width: 150px; height: 50px;">場所:<%= travel_memory.place.truncate(20) %></p>
 
-          <p style="width: 200px">紹介文<br>
-          <%= travel_memory.introduction %>
+          <p style="width: 150px; height: 50px;">
+            紹介文:<%= travel_memory.introduction.truncate(15) %>
           </p>
           <!--いいね機能非同期通信-->
           <p id="favorite_<%= travel_memory.id %>">
@@ -47,6 +45,10 @@
           <p><%= link_to "詳細を見る", travel_memory_path(travel_memory.id) %></p>
         </div>
       <% end %>
+      </div>
+      <div class="pagination" style="justify-content: center; margin-top: 30px;">
+        <%= paginate @travel_memories %>
+      </div>
     </div>
   </div>
 </div>

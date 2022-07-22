@@ -1,42 +1,37 @@
 <div class="container">
-  <div class-"row">
-    <div class="col-md-6" style="margin-top: 50px;">
-      <h1>登録情報編集</h1>
+  <%= render "public/customers/errors", obj: @customer %>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="margin-top: 50px;">
       <%= form_with model: @customer, url: customer_path, method: :patch do |f| %>
-        <div class="field">
-          <%= f.label :ユーザー名 %>
-          <%= f.text_field :screen_name %>
-        </div>
-
-        <div class="field">
-          <%= f.label :氏名 %>
-          <span>姓</span>
-          <%= f.text_field :last_name %>
-          <span>名</span>
-          <%= f.text_field :first_name %>
-        </div>
-
-        <div class="field">
-          <%= f.label :フリガナ %>
-          <span>セイ</span>
-          <%= f.text_field :last_kana %>
-          <span>メイ</span>
-          <%= f.text_field :first_kana %>
-        </div>
-
-        <div class="field">
-          <%= f.label :メールアドレス %>
-          <%= f.email_field :email %>
-        </div>
-
-        <div class="field">
-          <%= f.submit '編集する', class: "btn btn-sm btn-success" %>
-          <%= link_to '戻る', customer_path(@customer), class: "btn btn-sm btn-primary" %>
-        </div>
+      <table class="table mt-3">
+        <h4>登録情報編集</h4>
+        <tr>
+          <th><%= f.label :ユーザー名 %></th>
+          <td colspan="2"><%= f.text_field :screen_name %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :氏名 %></th>
+          <td class="d-flex　bd-highlight"><span>姓</span><%= f.text_field :last_name %></td>
+          <td class="d-flex　bd-highlight"><span>名</span><%= f.text_field :first_name %></td>
+        </tr>
+         <tr>
+          <th>フリガナ</th>
+          <td class="d-flex　bd-highlight"><span>姓</span><%= f.text_field :last_kana %></td>
+          <td class="d-flex　bd-highlight"><span>名</span><%= f.text_field :first_kana %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td colspan="2"><%= f.email_field :email %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td><%= f.submit '修正する', class: "btn btn-sm btn-success" %></td>
+          <td><%= link_to '戻る', customer_path(@customer), class: "btn btn-sm btn-primary" %></td>
+        </tr>
+      </table>
       <% end %>
-      <p>
-        <%= link_to "退会する", customer_confirm_path(@customer), class: "btn btn-sm btn-danger" %>
-      </p>
+      <div class="text-center"><%= link_to "退会する", customer_confirm_path(@customer), class: "btn btn-sm btn-danger" %></divs>
     </div>
   </div>
 </div>

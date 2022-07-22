@@ -1,109 +1,67 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
-      <h1>トップページ</h1>
-      <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
+    <div class="col-md-6" style="margin-top: 50px;">
 
-      <div id="header">Google Maps - 場所検索</div>
-      <input type="text" id="keyword"><button id="search">検索実行</button>
-      <button id="clear">結果クリア</button>
-      <div id="target"></div>
+      <div id="header">Google Maps -新着-</div>
+      <div id="map"></div>
       <style>
         #map {
           height: 400px;
-          width: 600px}
-      </style>
-      <div id="map"></div>
-      <script>
-      var map;
-      var marker;
-      var infowindow;
-
-      function initMap() {
-        //  マップ初期表示の位置設定
-        var target = document.getElementById('map');
-        var empire = {lat: 34.5801650, lng: 135.4623190};
-
-        // マップ表示
-        map = new google.maps.Map(target, {
-          center: empire,
-          zoom: 8
-        });
-      }
-
-      document.getElementById('search').addEventListener('click', function() {
-        var place = document.getElementById('keyword').value;
-        var geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode({
-          address: place
-        }, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var bounds = new google.maps.LatLngBounds();
-
-            for (var i in results) {
-              if (results[0].geometry) {
-                // 緯度経度を取得
-                var latlng = results[0].geometry.location;
-                // 住所を取得
-                var address = results[0].formatted_address;
-                // 検索結果値が含まれるように拡大
-                bounds.extend(latlng);
-                // マーカーのセット
-                setMarker(latlng);
-                // マーカーにクリックイベントを追加
-                markerEvent();
-              }
-            }
-          } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-            alert("見つかりません");
-          } else {
-            console.log(status);
-            alert("エラー発生")
-          }
-        });
-      });
-
-      // 検索クリアボタン押下時
-      document.getElementById('clear').addEventListener('click', function() {
-        deleteMarkers();
-      });
-
-      // マーカのセットを実施する
-      function setMarker(setplace) {
-        deleteMarkers();
-
-        var iconUrl = 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png';
-        marker = new google.maps.Marker({
-          position: setplace,
-          map: map,
-          icon: iconUrl
-        });
-      }
-      // マーカを削除する
-      function deleteMarkers() {
-        if(marker != null){
-          marker.setMap(null);
+          width: auto;
         }
-        marker = null;
-      }
+      </style>
 
-      // クリックイベント
-      function markerEvent() {
-        marker.addListener('click', function() {
-          infoWindow.open(map, marker);
-        });
-      }
-        // var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
-        // var Options = {
-        // zoom: 15,      //地図の縮尺値
-        // center: MyLatLng,    //地図の中心座標
-        // mapTypeId: 'roadmap'   //地図の種類
-        // };
-        // var map = new google.maps.Map(document.getElementById('map'), Options);
+      <script>
+        var map;
+        var marker;
+        var infowindow;
+
+        function initMap() {
+          //  マップ初期表示の位置設定
+          var map = document.getElementById('map');
+          var empire = {lat: 35.39175148, lng: 139.44405020};
+
+          // マップ表示
+          map = new google.maps.Map(map, {
+            center: empire,
+            zoom: 5
+          });
+
+          <% @travel_memories.each do |travel_memory| %>
+          var marker = new google.maps.Marker({
+            position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
+            map: map
+          });
+          <% end %>
+        }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
 
+    </div>
+    <div class="col-md-6" style="margin-top: 150px; text-align: center;">
+      <h2 style="font-size: 38px;">ようこそ、travelへ！</h2>
+      <p style="font-size: 26px;">
+        ここは旅行での思い出を投稿する場所です。<br>
+        会員でない方も記事の閲覧は可能ですが、<br>
+        記事の投稿には会員登録が必要です。
+      </p>
+      <p>ゲストとして利用する:<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %></p>
+    </div>
+    <div class="col-md-12" style="margin-top: 50px;">
+      <h4>新着投稿</h4>
+      <div class="d-flex flex-wrap">
+        <% @travel_memories.each do |travel_memory| %>
+          <div class="box mx-2">
+            <%= link_to travel_memory_path(travel_memory.id) do %>
+              <%= image_tag travel_memory.get_image, size: "200x200" %>
+            <% end %>
+            <p>場所:<%= travel_memory.place %></p>
+            <p>紹介:<%= travel_memory.introduction.truncate(10) %></p>
+            <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="float-right"><%= link_to "全ての投稿を見る", travel_memories_path %></div>
     </div>
   </div>
 </div>

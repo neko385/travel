@@ -1,9 +1,65 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-        <h4>投稿一覧</h4>
-        <%= render 'public/travel_memories/date', travel_memories: @travel_memories %>
-        <%= render 'public/travel_memories/map' %>
+      <div id="header">Google Maps - 投稿一覧</div>
+      <div id="map"></div>
+      <style>
+        #map {
+          height: 400px;
+          width: auto
+        }
+      </style>
+
+      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+      <script>
+        var map;
+        var marker;
+        var infoWindow;
+
+        function initMap() {
+          //  マップ初期表示の位置設定
+          var map = document.getElementById('map');
+          var empire = {lat: 34.5801650, lng: 135.4623190};
+
+          // マップ表示
+          map = new google.maps.Map(map, {
+            center: empire,
+            zoom: 6
+          });
+
+          <% @travel_memories_map.each do |travel_memory| %>
+          var marker = new google.maps.Marker({
+            position: {lat: <%= travel_memory.latitude %>, lng: <%= travel_memory.longitude %>},
+            map: map
+          });
+          <% end %>
+        }
+      </script>
+    </div>
+    <div class="col-12" style="margin-top: 30px;">
+      <h4>投稿一覧</h4>
+      <div class="d-flex flex-wrap">
+        <% @travel_memories.each do |travel_memory| %>
+          <div class="box mx-2">
+            <%= link_to travel_memory_path(travel_memory.id) do %>
+              <%= image_tag travel_memory.get_image, size: "200x200" %>
+            <% end %>
+            <p>場所:<%= travel_memory.place %></p>
+            <p>紹介:<%= travel_memory.introduction.truncate(10) %></p>
+            <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+            <% if customer_signed_in? %>
+            <!--いいね機能非同期通信-->
+              <p id="favorite_<%= travel_memory.id %>">
+                <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+              </p>
+            <% end %>
+            <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
+          </div>
+        <% end %>
+      </div>
+      <div class="pagination" style="justify-content: center; margin-top: 30px;">
+        <%= paginate @travel_memories %>
+      </div>
     </div>
   </div>
 </div>

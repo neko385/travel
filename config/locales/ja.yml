@@ -4,6 +4,7 @@ ja:
       travel_memory:
         place: 場所
         introduction: 紹介文
+        latitude: マップ
       travel_memory_comment:
         comment: コメント
       customer:

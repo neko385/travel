@@ -6,7 +6,9 @@ class TravelMemory < ApplicationRecord
   has_one_attached :image
 
   validates :place, presence: true
-  validates :introduction, presence: true
+  validates :introduction, presence: true, length: { maximum: 200 }
+  validates :latitude, presence: true
+
 
   def get_image
     (image.attached?) ? image : 'no_image.jpg'
