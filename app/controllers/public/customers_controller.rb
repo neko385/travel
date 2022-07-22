@@ -39,7 +39,7 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @favorites = Favorite.where(customer_id: @customer.id).pluck(:travel_memory_id)
     @favorite_travel_memories = TravelMemory.find(@favorites)
-    # @favorite_index = @customer.favorites.page(params[:page]).per(10)
+    # @favorite_index = @favorites.page(params[:page]).per(10)
   end
 
 
