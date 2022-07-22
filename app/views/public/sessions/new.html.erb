@@ -1,9 +1,11 @@
 <div class="container">
+  <%= render "public/shared/error_messages", resource: resource %>
   <div class="row">
-    <div class="col-md-4" style="text-align: center; margin-top: 50px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-2" style="text-align: center; margin-top: 50px;">
       <h2>Log in</h2>
     </div>
-    <div class="col-md-8" style=" margin-top: 50px;">
+    <div class="col-md-6" style=" margin-top: 80px;">
       <%= form_with model: @customer,url: customer_session_path do |f| %>
         <div class="field">
           <%= f.label :メールアドレス %><br />
@@ -15,15 +17,8 @@
           <%= f.password_field :password, autocomplete: "current-password" %>
         </div>
 
-        <% if devise_mapping.rememberable? %>
-          <div class="field">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
-          </div>
-        <% end %>
-
-        <div class="actions">
-          <%= f.submit "Log in" %>
+        <div class="actions mt-3">
+          <%= f.submit "ログイン", class: "btn btn-md btn-success" %>
         </div>
       <% end %>
 

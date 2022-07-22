@@ -14,8 +14,8 @@
         <p>紹介文</p>
         <%= f.text_area :introduction, size: "40x8" %>
 
-        <%= f.hidden_field :latitude, value: "" %>
-        <%= f.hidden_field :longitude, value: "" %>
+        <%= f.hidden_field :latitude, value: @travel_memory.latitude %>
+        <%= f.hidden_field :longitude, value: @travel_memory.longitude %>
 
         <p>
           <%= f.submit "編集する", class: "btn btn-sm btn-success" %>
@@ -29,7 +29,7 @@
     <div class="col-md-6" style="margin-top: 50px;">
       <div id="header">Google Maps -編集-</div>
       <input type="text" id="mapKeyword" name="keyword"><button id="search" onclik="search">検索実行</button>
-      <button id="clear">結果クリア</button>
+      <!--<button id="clear">結果クリア</button>-->
       <div id="map"></div>
       <style>
         #map {
@@ -37,6 +37,7 @@
           width: auto;
         }
       </style>
+      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
       <script>
         var map;
         var marker;
@@ -44,7 +45,7 @@
 
         function initMap() {
           // マップ初期表示の位置設定
-          var map = document.getElementById('map');
+          map = document.getElementById('map');
           var empire = {lat:<%= @travel_memory.latitude %>, lng:<%= @travel_memory.longitude %>};
 
           // マップ表示
@@ -53,7 +54,7 @@
             zoom: 10
           });
 
-          var marker = new google.maps.Marker({
+          marker = new google.maps.Marker({
             position: empire,
             map: map
           });
@@ -89,19 +90,15 @@
             } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
               alert("見つかりません");
             } else {
-              console.log(place);
-              console.log(geocoder);
-              console.log(results);
-              console.log(status);
               alert("エラー発生")
             }
           });
         });
 
-         // 検索クリアボタン押下時
-        document.getElementById('clear').addEventListener('click', function() {
-          deleteMarkers();
-        });
+        // 検索クリアボタン押下時
+        // document.getElementById('clear').addEventListener('click', function() {
+        //   deleteMarkers();
+        // });
 
         // マーカのセットを実施する
         function setMarker(setplace) {
@@ -114,13 +111,14 @@
 
         // マーカを削除する
         function deleteMarkers() {
+          // initMap();
           if(marker != null){
             marker.setMap(null);
           }
-          marker = null;
+           marker = null;
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
+
     </div>
   </div>
 </div>

@@ -1,24 +1,54 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
       <h2>キーワード検索結果</h2>
       <% if @range == "Customer" %>
-        <h5>検索結果は"<%= @keyword %>"</h5>
-        <% @customer.each do |customer| %>
-          <p><%= customer.screen_name %></p>
-          <p><%= link_to "詳細を見る", customer_path(customer) %></p>
-        <% end %>
+      <h5>ユーザー検索内容は"<%= @keyword %>"</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ユーザー名</th>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customer.each do |customer| %>
+            <tr>
+              <td><%= customer.screen_name %></td>
+              <td><%= link_to "詳細を見る", customer_path(customer) %></td>
+              <td></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <table>
+          <tr>
+            <td>
+              <%= paginate @customer %>
+            </td>
+          </tr>
+        </table>
       <% else %>
-        <h5>検索結果は"<%= @keyword %>"</h5>
+        <h5>投稿の検索内容は"<%= @keyword %>"</h5>
         <div class="d-flex flex-wrap">
           <% @travel_memories.each do |travel_memory| %>
-          <div class="box mx-2">
+          <div class="box m-3">
             <p><%= image_tag travel_memory.get_image, size: "150x150" %></p>
-            <p><%= travel_memory.place %></p>
-            <p><%= travel_memory.introduction %></p>
+            <p style="width: 150px; height: 50px">場所：<%= travel_memory.place.truncate(20) %></p>
+            <p style="width: 150px; height: 50px">紹介文:<%= travel_memory.introduction.truncate(15) %></p>
+            <% if customer_signed_in? %>
+            <!--いいね機能非同期通信-->
+              <p id="favorite_<%= travel_memory.id %>">
+                <%= render 'public/favorites/btn', travel_memory: travel_memory %>
+              </p>
+            <% end %>
             <p><%= link_to "詳細を見る", travel_memory_path(travel_memory) %></p>
           </div>
           <% end %>
+        </div>
+        <div class="pagination" style="justify-content: center; margin-top: 30px;">
+          <%= paginate @travel_memories %>
         </div>
       <% end %>
     </div>
