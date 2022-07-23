@@ -3,13 +3,13 @@
     <div class="col-md-12" style="margin-top: 50px;">
       <h4>お気に入り一覧</h4>
       <div class="d-flex flex-wrap">
-      <% @favorite_travel_memories.each do |travel_memory| %>
+      <% @favorite_list.each do |travel_memory| %>
         <div class="box mx-2">
           <%= link_to travel_memory_path(travel_memory) do %>
             <%= image_tag travel_memory.get_image, size: "200x200" %>
           <% end %>
           <p>場所:<%= travel_memory.place %></p>
-          <p>紹介:<%= travel_memory.introduction %></p>
+          <p style="width: 200px">紹介:<%= travel_memory.introduction.truncate(20) %></p>
           <% if customer_signed_in? %>
             <!--いいね機能非同期通信-->
             <p id="favorite_<%= travel_memory.id %>">
@@ -19,7 +19,7 @@
           <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
         </div>
       <% end %>
-
+      <%= paginate @favorite_list %>
       </div>
     </div>
   </div>

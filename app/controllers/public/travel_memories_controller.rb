@@ -16,13 +16,14 @@ class Public::TravelMemoriesController < ApplicationController
 
   def index
     @travel_memories_map = TravelMemory.all
-    @travel_memories = TravelMemory.order(created_at: :desc).page(params[:page]).per(10)
+    @travel_memories = TravelMemory.includes(:customer).where(customers: {is_deleted: false}).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
     @travel_memory = TravelMemory.find(params[:id])
     @customer = @travel_memory.customer
     @travel_memory_comment = TravelMemoryComment.new
+    @travel_memory_comments = TravelMemoryComment.includes(:customer).where(customers: {is_deleted: false})
   end
 
   def edit
