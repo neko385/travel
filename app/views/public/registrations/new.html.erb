@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-2" style="text-align: center; margin-top: 50px;">
+    <div class="col-md-3" style="text-align: center; margin-top: 30px;">
       <h2>Sign up</h2>
     </div>
-    <div class="col-md-6" style="text-align: center; margin-top: 100px;">
+    <div class="col-md-6" style="text-align: center; margin-top: 50px;">
       <%= form_with model: @customer, url: customer_registration_path do |f| %>
         <%= render "public/shared/error_messages", resource: resource %>
 

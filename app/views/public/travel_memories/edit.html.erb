@@ -29,7 +29,6 @@
     <div class="col-md-6" style="margin-top: 50px;">
       <div id="header">Google Maps -編集-</div>
       <input type="text" id="mapKeyword" name="keyword"><button id="search" onclik="search">検索実行</button>
-      <!--<button id="clear">結果クリア</button>-->
       <div id="map"></div>
       <style>
         #map {
@@ -95,11 +94,6 @@
           });
         });
 
-        // 検索クリアボタン押下時
-        // document.getElementById('clear').addEventListener('click', function() {
-        //   deleteMarkers();
-        // });
-
         // マーカのセットを実施する
         function setMarker(setplace) {
           deleteMarkers();
@@ -118,7 +112,6 @@
            marker = null;
         }
       </script>
-
     </div>
   </div>
 </div>
