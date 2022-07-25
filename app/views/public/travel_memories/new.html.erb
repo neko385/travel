@@ -86,10 +86,6 @@
           } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
             alert("見つかりません");
           } else {
-            console.log(place);
-            console.log(geocoder);
-            console.log(results);
-            console.log(status);
             alert("エラー発生")
           }
         });
@@ -116,7 +112,7 @@
         marker = null;
       }
 
-      // クリックイベント
+      クリックイベント
       function markerEvent() {
         marker.addListener('click', function() {
           infoWindow.open(map, marker);
