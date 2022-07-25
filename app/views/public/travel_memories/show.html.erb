@@ -22,7 +22,7 @@
           <% end %>
         </p>
       <% end %>
-      <p class="comments-count mx-5 mt-3"><%= render 'public/travel_memory_comments/counter', travel_memory: @travel_memory %></p>
+      <p class="comments-count mx-5 mt-3"><%= render 'public/travel_memory_comments/counter', travel_memory: @travel_memory, customer: @customer %></p>
     </div>
     <div class="col-md-7" style="margin-top: 50px;">
       <div id="header">Google Maps</div>
