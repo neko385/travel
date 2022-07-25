@@ -23,9 +23,6 @@ class Customer < ApplicationRecord
   validates :first_kana, presence: true
   validates :email, presence: true
 
-  # def get_profile_image
-  #   (profile_image.attached?) ? profile_image : 'no_image_customer.jpg'
-  # end
 
   # フォローした時の処理
   def follow(customer_id)
