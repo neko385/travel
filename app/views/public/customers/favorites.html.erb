@@ -19,8 +19,11 @@
           <p><%= link_to '詳細を見る', travel_memory_path(travel_memory.id) %></p>
         </div>
       <% end %>
-      <%= paginate @favorite_list %>
+      </div>
+      <div class="pagination" style="justify-content: center; margin-top: 30px;">
+        <%= paginate @favorite_list %>
       </div>
     </div>
+
   </div>
 </div>

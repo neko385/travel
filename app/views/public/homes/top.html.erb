@@ -40,12 +40,21 @@
     </div>
     <div class="col-md-6" style="margin-top: 150px; text-align: center;">
       <h2 style="font-size: 38px;">ようこそ、travelへ！</h2>
-      <p style="font-size: 26px;">
-        ここは旅行での思い出を投稿する場所です。<br>
-        会員でない方も記事の閲覧は可能ですが、<br>
-        記事の投稿には会員登録が必要です。
-      </p>
-      <p>ゲストとして利用する:<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %></p>
+
+      <% if customer_signed_in? %>
+        <p style="font-size: 23px;">
+          ここは旅行での思い出を投稿する場所です。<br>
+          楽しかった場所や他の人に知ってもらいたい場所を<br>
+          どんどん投稿していきましょう！
+        </p>
+      <% else %>
+        <p style="font-size: 26px;">
+          ここは旅行での思い出を投稿する場所です。<br>
+          会員でない方も記事の閲覧は可能ですが、<br>
+          記事の投稿には会員登録が必要です。
+        </p>
+        <p>ゲストとして利用する:<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %></p>
+      <% end %>
     </div>
     <div class="col-md-12" style="margin-top: 50px;">
       <h4>新着投稿</h4>
