@@ -1,5 +1,5 @@
 <!--headerの部分テンプレート-->
-  <nav class="navbar navbar-expand-lg navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f0f8ff;">
     <div class="container">
       <a class="navbar-brand p-3" href="/">
         <span>travel</span>
@@ -11,39 +11,45 @@
       <%= render "public/searches/search" %>
       <ul class="navbar-nav ml-auto">
       <% if customer_signed_in? %>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "マイページ", customer_path(current_customer) %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "新規投稿", new_travel_memory_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "投稿一覧", travel_memories_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
         </li>
       <% elsif admin_signed_in? %>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "会員一覧", admin_customers_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
         </li>
       <% else %>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "about", about_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "投稿一覧", travel_memories_path %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "ログイン", customer_session_path, data: {"turbolinks" => false} %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-2">
           <%= link_to "新規登録", new_customer_registration_path %>
         </li>
       <% end %>
       </ul>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-md-6">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
     </div>
   </div>

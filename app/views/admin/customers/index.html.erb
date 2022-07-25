@@ -8,6 +8,7 @@
           <tr>
             <th>ユーザー名</th>
             <th>投稿数</th>
+            <th>ステータス</th>
             <th></th>
           </tr>
         </thead>
@@ -16,6 +17,13 @@
           <tr>
             <td><%= customer.screen_name %></td>
             <td><%= customer.travel_memories.count %>件</td>
+            <td>
+              <% if customer.is_deleted %>
+                退会済み
+              <% else %>
+                有効
+              <% end %>
+            </td>
             <td><%= link_to "詳細を見る", admin_customer_path(customer) %></td>
           </tr>
         <% end %>

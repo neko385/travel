@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-5" style="margin-top: 50px;">
+    <div class="col-md-5" style="margin-top: 20px;">
       <h4 style="margin-top: 30px;">投稿詳細</h4>
 
       <p class="mx-5"><%= image_tag @travel_memory.get_image, size: "150x150" %></p>
@@ -24,7 +24,7 @@
       <% end %>
       <p class="comments-count mx-5 mt-3"><%= render 'public/travel_memory_comments/counter', travel_memory: @travel_memory %></p>
     </div>
-    <div class="col-md-7" style="margin-top: 100px;">
+    <div class="col-md-7" style="margin-top: 50px;">
       <div id="header">Google Maps</div>
       <div id="map"></div>
       <style>
@@ -61,9 +61,9 @@
   </div>
   <div class="row">
     <div class="col-md-12 mt-4">
-      <h6>コメント一覧</h6>
+      <h6>コメント</h6>
       <div class="new-comment">
-        <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory, travel_memory_comment: @travel_memory_comments %>
+        <%= render 'public/travel_memory_comments/comment', travel_memory: @travel_memory %>
       </div>
       <% if customer_signed_in? %>
         <div id="comments-area">

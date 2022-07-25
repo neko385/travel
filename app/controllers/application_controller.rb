@@ -2,29 +2,29 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_customer!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
-  # 管理者側ログイン後
-  def after_admin_sign_in_path_for(resource)
-    admin_customers_path
+  def after_sign_in_path_for(resource)
+    if admin_signed_in?
+      admin_customers_path
+    elsif customer_signed_in?
+      travel_memories_path
+    else
+      root_path
+    end
   end
 
-  # 管理者側ログアウト後
-  def after_admin_sign_out_path_for(resource)
-    new_admin_session_path
+  def after_sign_out_path_for(resource)
+    case resource
+      when :admin
+        new_admin_session_path
+      when :customer
+        root_path
+    end
   end
 
-  # 顧客側ログイン後
-  def after_public_sign_in_path_for(resource)
-    public_travel_memories_path
-  end
-  # 顧客側新規登録後
-  def after_public_sign_up_path_for(resource)
-    public_customer_path
-  end
-  # 顧客側ログアウト後
-  def after_public_sign_out_path_for(resource)
-    public_root_path
-  end
+  # def after_sign_up_path_for(resource)
+  #   customer_path(resource)
+  # end
+
   protected
 
   def configure_permitted_parameters

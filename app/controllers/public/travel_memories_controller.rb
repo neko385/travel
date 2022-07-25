@@ -1,6 +1,7 @@
 class Public::TravelMemoriesController < ApplicationController
   before_action :authenticate_customer!, except: [:index, :show]
 
+
   def new
     @travel_memory = TravelMemory.new
   end
@@ -23,7 +24,6 @@ class Public::TravelMemoriesController < ApplicationController
     @travel_memory = TravelMemory.find(params[:id])
     @customer = @travel_memory.customer
     @travel_memory_comment = TravelMemoryComment.new
-    @travel_memory_comments = TravelMemoryComment.includes(:customer).where(customers: {is_deleted: false})
   end
 
   def edit
