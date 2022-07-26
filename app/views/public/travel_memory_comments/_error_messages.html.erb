@@ -1,9 +1,0 @@
-<!--エラーメッセージ-->
-<% if obj.errors.any? %>
-  <%= model.errors.count %>件のエラーが発生しました
-  <ul>
-    <%= model.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
