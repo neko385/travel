@@ -15,13 +15,15 @@ class Customer < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
 
+
   # バリデーション
   validates :screen_name, presence: true, length: { minimum: 2, maximum: 20 }
   validates :last_name, presence: true
   validates :first_name, presence: true
-  validates :last_kana, presence: true
-  validates :first_kana, presence: true
+  validates :last_kana, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: "全角カタカナのみで入力して下さい" }, presence: true
+  validates :first_kana, format: { with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/, message: "全角カタカナのみで入力して下さい" }, presence: true
   validates :email, presence: true
+
 
 
   # フォローした時の処理
