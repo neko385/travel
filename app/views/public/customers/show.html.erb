@@ -41,7 +41,7 @@
           <p id="favorite_<%= travel_memory.id %>">
             <%= render 'public/favorites/btn', travel_memory: travel_memory %>
           </p>
-          <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+          <p>コメント件数:<%= travel_memory.travel_memory_comments.active.count %></p>
           <p><%= link_to "詳細を見る", travel_memory_path(travel_memory.id) %></p>
         </div>
       <% end %>

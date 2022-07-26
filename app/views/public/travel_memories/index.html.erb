@@ -46,7 +46,7 @@
             <% end %>
             <p>場所:<%= travel_memory.place %></p>
             <p>紹介:<%= travel_memory.introduction.truncate(10) %></p>
-            <p>コメント件数:<%= travel_memory.travel_memory_comments.count %></p>
+            <p>コメント件数:<%= travel_memory.travel_memory_comments.active.count %></p>
             <% if customer_signed_in? %>
             <!--いいね機能非同期通信-->
               <p id="favorite_<%= travel_memory.id %>">
