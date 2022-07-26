@@ -31,6 +31,7 @@
 - 自身の住んでいる場所のいいところをアピールしたり，知りたいとき
 
 ## 設計書
+![ER図](https://user-images.githubusercontent.com/102905708/181043963-1bc5d08d-ee90-4f5d-b3e8-6b15071c0763.jpg)
 
 
 ## 開発環境
@@ -40,7 +41,3 @@
 - フレームワーク：Ruby on Rails
 - JS ライブラリ：jQuery
 - IDE：Cloud9
-
-## 使用素材
-
-使用検討中です

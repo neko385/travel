@@ -1,7 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6" style="margin-top: 50px;">
-
       <div id="header">Google Maps -新着-</div>
       <div id="map"></div>
       <style>
@@ -36,11 +35,9 @@
         }
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
-
     </div>
     <div class="col-md-6" style="margin-top: 150px; text-align: center;">
       <h2 style="font-size: 38px;">ようこそ、travelへ！</h2>
-
       <% if customer_signed_in? %>
         <p style="font-size: 23px;">
           ここは旅行での思い出を投稿する場所です。<br>

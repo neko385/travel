@@ -21,10 +21,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def after_sign_up_path_for(resource)
-  #   customer_path(resource)
-  # end
-
   protected
 
   def configure_permitted_parameters
