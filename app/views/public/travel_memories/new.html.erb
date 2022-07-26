@@ -9,11 +9,11 @@
         <p><%= f.file_field :image, accept: "image/*" %></p>
 
         <h5>場所</h5>
-        <p><%= f.text_field :place, size: "40x2" %></p>
+        <p><%= f.text_field :place, size: "30x2" %></p>
 
 
         <h5>紹介文</h5>
-        <%= f.text_area :introduction, size: "40x8" %>
+        <%= f.text_area :introduction, size: "30x8" %>
 
         <%= f.hidden_field :customer_id, value: current_customer.id %>
         <%= f.hidden_field :latitude, value: "" %>
@@ -24,12 +24,12 @@
         </p>
         <% end %>
     </div>
-    <div class="col-md-8" style="margin-top: 50px;">
+    <div class="col-md-1"></div>
+    <div class="col-md-6" style="margin-top: 50px;">
       <div id="header">Google Maps - 場所検索</div>
       <input type="text" id="mapKeyword" name="keyword"><button id="search" onclik="search">検索実行</button>
       <button id="clear">結果クリア</button>
       <div id="map"></div>
-      <!--<div id="target"></div>-->
       <style>
         #map {
           height: 500px;
@@ -38,90 +38,88 @@
       </style>
 
       <script>
-      var map;
-      var marker;
-      var infoWindow;
+        var map;
+        var marker;
+        var infoWindow;
 
-      function initMap() {
-        //  マップ初期表示の位置設定
-        var target = document.getElementById('map');
-        var empire = {lat: 34.5801650, lng: 135.4623190};
+        function initMap() {
+          //  マップ初期表示の位置設定
+          var target = document.getElementById('map');
+          var empire = {lat: 34.5801650, lng: 135.4623190};
 
-        // マップ表示
-        map = new google.maps.Map(target, {
-          center: empire,
-          zoom: 8
-        });
-      }
-
-      document.getElementById('search').addEventListener('click', function() {
-        var place = document.getElementById('mapKeyword').value;
-        var geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode({
-          address: place
-        }, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var bounds = new google.maps.LatLngBounds();
-
-            for (var i in results) {
-              if (results[0].geometry) {
-                // 緯度経度を取得
-                var latlng = results[0].geometry.location;
-                var lat = latlng.lat();
-                var lng = latlng.lng();
-                // 住所を取得
-                var address = results[0].formatted_address;
-                // 検索結果値が含まれるように拡大
-                bounds.extend(latlng);
-                // マーカーのセット
-                setMarker(latlng);
-                // マーカーにクリックイベントを追加
-                markerEvent();
-              }
-            }
-            map.fitBounds(bounds);
-            document.getElementById('travel_memory_latitude').value = lat;
-            document.getElementById('travel_memory_longitude').value = lng;
-          } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-            alert("見つかりません");
-          } else {
-            alert("エラー発生")
-          }
-        });
-      });
-
-      // 検索クリアボタン押下時
-      document.getElementById('clear').addEventListener('click', function() {
-        deleteMarkers();
-      });
-
-      // マーカのセットを実施する
-      function setMarker(setplace) {
-        deleteMarkers();
-        marker = new google.maps.Marker({
-          position: setplace,
-          map: map
-        });
-      }
-      // マーカを削除する
-      function deleteMarkers() {
-        if(marker != null){
-          marker.setMap(null);
+          // マップ表示
+          map = new google.maps.Map(target, {
+            center: empire,
+            zoom: 8
+          });
         }
-        marker = null;
-      }
 
-      クリックイベント
-      function markerEvent() {
-        marker.addListener('click', function() {
-          infoWindow.open(map, marker);
+        document.getElementById('search').addEventListener('click', function() {
+          var place = document.getElementById('mapKeyword').value;
+          var geocoder = new google.maps.Geocoder();
+
+          geocoder.geocode({
+            address: place
+          }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              var bounds = new google.maps.LatLngBounds();
+
+              for (var i in results) {
+                if (results[0].geometry) {
+                  // 緯度経度を取得
+                  var latlng = results[0].geometry.location;
+                  var lat = latlng.lat();
+                  var lng = latlng.lng();
+                  // 住所を取得
+                  var address = results[0].formatted_address;
+                  // 検索結果値が含まれるように拡大
+                  bounds.extend(latlng);
+                  // マーカーのセット
+                  setMarker(latlng);
+                  // マーカーにクリックイベントを追加
+                  markerEvent();
+                }
+              }
+              map.fitBounds(bounds);
+              document.getElementById('travel_memory_latitude').value = lat;
+              document.getElementById('travel_memory_longitude').value = lng;
+            } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+              alert("見つかりません");
+            } else {
+              alert("エラー発生")
+            }
+          });
         });
-      }
+
+        // 検索クリアボタン押下時
+        document.getElementById('clear').addEventListener('click', function() {
+          deleteMarkers();
+        });
+
+        // マーカのセットを実施する
+        function setMarker(setplace) {
+          deleteMarkers();
+          marker = new google.maps.Marker({
+            position: setplace,
+            map: map
+          });
+        }
+        // マーカを削除する
+        function deleteMarkers() {
+          if(marker != null){
+            marker.setMap(null);
+          }
+          marker = null;
+        }
+
+        // クリックイベント
+        function markerEvent() {
+          marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+          });
+        }
       </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap" async defer></script>
-
-
     </div>
   </div>
 </div>

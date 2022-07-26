@@ -1,9 +1,9 @@
 <% if travel_memory.favorited_by?(current_customer) %>
   <%= link_to travel_memory_favorites_path(travel_memory), method: :delete, remote: true do %>
-    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i><%= travel_memory.favorites.count %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i><%= travel_memory.favorites.favorite.count %>
   <% end %>
 <% else %>
   <%= link_to travel_memory_favorites_path(travel_memory), method: :post, remote: true do %>
-    <i class="fas fa-heart"></i><%= travel_memory.favorites.count %>
+    <i class="fas fa-heart"></i><%= travel_memory.favorites.favorite.count %>
   <% end %>
 <% end %>
